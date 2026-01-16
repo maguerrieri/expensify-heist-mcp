@@ -1,0 +1,17 @@
+[project]
+name = "expensify-heist-mcp"
+version = "0.1.0"
+description = "MCP server that heists Expensify exports via Safari JS injection before bot detection kicks in"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "nest-asyncio>=1.5.0",
+]
+
+[project.scripts]
+expensify-heist-mcp = "expensify_heist_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

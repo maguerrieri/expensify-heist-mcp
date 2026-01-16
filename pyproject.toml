@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "MCP server that heists Expensify exports via Safari JS injection before bot detection kicks in"
 readme = "README.md"
 requires-python = ">=3.11"
+classifiers = [
+    "Operating System :: MacOS :: MacOS X",
+    "Environment :: MacOS X",
+]
 dependencies = [
     "mcp>=1.0.0",
     "nest-asyncio>=1.5.0",

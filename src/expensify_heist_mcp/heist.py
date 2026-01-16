@@ -181,19 +181,23 @@ def sync_fetch_expenses_csv(report_id: str | None = None, headless: bool = True,
     # Note the current time to find new downloads
     start_time = time.time()
     
-    # Click the first report checkbox using JavaScript
-    js_click_checkbox = '''
+    # Click ALL report checkboxes using JavaScript
+    js_click_all_checkboxes = '''
         (function() {
-            var checkbox = document.querySelector('input.reportstable_checkbox');
-            if (checkbox) {
-                checkbox.click();
-                return 'clicked';
+            var checkboxes = document.querySelectorAll('input.reportstable_checkbox');
+            var clicked = 0;
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (!checkboxes[i].checked) {
+                    checkboxes[i].click();
+                    clicked++;
+                }
             }
-            return 'not found';
+            return clicked.toString();
         })()
     '''
-    result = run_javascript(js_click_checkbox)
-    if result != "clicked":
+    result = run_javascript(js_click_all_checkboxes)
+    clicked_count = int(result) if result.isdigit() else 0
+    if clicked_count == 0:
         raise RuntimeError("No report checkboxes found on the page")
     
     time.sleep(0.5)
